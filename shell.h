@@ -13,5 +13,7 @@
 void _print(const char *text);
 void prompt(char *command, size_t size);
 void _exe(const char *pmpt);
+int token(const char *pmpt, char *arg[128]);
+void _exe(const char *pmpt);
 
 #endif
