@@ -9,7 +9,7 @@
 
 void _exe(const char *pmpt)
 {
-	pid_t child_id, child_t;
+	pid_t child_id, child_terminated;
 	char *arg[128], *token;
 	int arg_no, state;
 
@@ -17,7 +17,7 @@ void _exe(const char *pmpt)
 
 	if (child_id == -1)
 	{
-		perror("fork\n");
+		perror("fork");
 		_print("Error: Couldn't fork last process.\n");
 		exit(EXIT_FAILURE);
 	}
@@ -35,14 +35,14 @@ void _exe(const char *pmpt)
 
 		if (execve(arg[0], arg, NULL) == -1)
 		{
-			perror("execve\n");
-			_print("Couldn't execute command.\n");
+			perror("execve");
 			exit(EXIT_FAILURE);
+		}
 	}
 	else
 	{
 		child_terminated = waitpid(child_id, &state, 0);
-		
+
 		if (child_terminated == -1)
 		{
 			perror("waitpid\n");
